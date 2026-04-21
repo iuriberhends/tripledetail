@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist Final - Triple Detail</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--black:#080a0c;--dark:#0d1014;--card:#131720;--border:#252a35;--silver:#c8d0dc;--silver-bright:#e8edf5;--red:#c0272d;--red-glow:rgba(192,39,45,.3);--text:#dde3ec;--muted:#7a8394}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--text);min-height:100vh;background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.018) 0px, rgba(255,255,255,.018) 1px, transparent 1px, transparent 4px),repeating-linear-gradient(-45deg, rgba(255,255,255,.018) 0px, rgba(255,255,255,.018) 1px, transparent 1px, transparent 4px),radial-gradient(ellipse at 50% 0, #1a2030 0, #080a0c 70%);padding-bottom:88px}
+    .header{background:linear-gradient(180deg,#0f1420 0,#080a0c 100%);border-bottom:2px solid var(--border);padding:22px 20px 18px;position:relative}
+    .header-brand{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .header-logo{width:150px;max-width:35vw;filter:drop-shadow(0 6px 10px rgba(0,0,0,.55)) drop-shadow(0 0 14px rgba(0,0,0,.45));}
+    .brand-texts{display:flex;flex-direction:column;gap:2px}
+    .header:after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--silver),var(--red),transparent)}
+    .eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+    .title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:var(--silver-bright);line-height:1}
+    .subtitle{margin-top:8px;color:var(--muted);font-size:14px;max-width:920px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;background:var(--dark);padding:16px 20px;border-bottom:1px solid var(--border)}
+    .tab-btn{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;background:none;border:1px solid var(--border);color:var(--silver);padding:10px 16px;border-radius:999px;cursor:pointer;transition:.2s}
+    .tab-btn.active{background:linear-gradient(135deg,var(--red),#8b1a1e);color:#fff;border-color:var(--red);box-shadow:0 2px 12px var(--red-glow)}
+    .meta-bar{background:var(--card);border-bottom:1px solid var(--border);padding:16px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+    .meta-field{display:flex;flex-direction:column;gap:4px}.meta-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:700}.meta-input{background:none;border:none;border-bottom:1px solid var(--border);color:var(--text);padding:7px 0;outline:none;font-size:14px}
+    .content{padding:18px 20px 0;max-width:1200px}
+    .tab-panel{display:none}.tab-panel.active{display:block}
+    .intro{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:18px}
+    .intro-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--silver-bright)}
+    .intro-text{margin-top:6px;font-size:14px;color:var(--muted);max-width:82ch}
+    .stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+    .section-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--silver-bright)}
+    .section-badge{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--red);font-weight:700}
+    .check-list{display:flex;flex-direction:column;gap:3px}
+    .check-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.05)}
+    .check-item:last-child{border-bottom:none}
+    .check-item input{margin-top:3px;width:18px;height:18px;accent-color:var(--red);flex-shrink:0}
+    .check-label{font-size:13.5px;line-height:1.4}
+    .obs-area{margin-top:20px;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:10px;padding:16px}
+    .obs-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--silver-bright);margin-bottom:10px}
+    .obs-textarea{width:100%;min-height:90px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:12px;font:inherit;resize:vertical;outline:none}
+    .finish-bar{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(0deg,#060809 0,#0d1014 100%);border-top:1px solid var(--border);padding:12px 20px;display:flex;gap:10px;align-items:center}
+    .finish-status{flex:1;font-size:13px;color:var(--muted)}
+    .btn{padding:10px 16px;border-radius:8px;cursor:pointer;font-weight:700;border:none}.btn-reset{background:none;border:1px solid var(--border);color:var(--silver)}.btn-print{background:linear-gradient(135deg,var(--red),#8b1a1e);color:#fff;box-shadow:0 2px 12px var(--red-glow)}
+    @media print{
+      body{background:#fff !important;color:#000 !important}
+      body *{visibility:hidden !important}
+      .print-page,.print-page *{visibility:visible !important}
+      .print-page{position:absolute;left:0;top:0;width:100%;padding:0}
+      .tabs,.meta-bar,.finish-bar{display:none !important}
+      .section,.intro,.obs-area{background:#fff !important;border:1px solid #ddd !important;box-shadow:none !important}
+      .header-logo{width:120px !important;filter:grayscale(100%) drop-shadow(0 4px 8px rgba(0,0,0,.25)) !important}
+      .title,.intro-title,.section-title,.obs-title{color:#111 !important}
+      .subtitle,.intro-text,.finish-status{color:#444 !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="print-page">
+    <header class="header">
+    <div class="header-brand">
+      <img class="header-logo" src="logo-2.jpg" alt="Triple Detail">
+      <div class="brand-texts">
+      <div class="eyebrow">Triple Detail</div>
+      <div class="title">Checklist Final de Lavagem</div>
+      </div>
+    </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-stage="essencial">Lavagem Essencial</button>
+      <button class="tab-btn" data-stage="detalhada">Lavagem Detalhada</button>
+    </div>
+
+    <div class="meta-bar">
+      <div class="meta-field"><span class="meta-label">Cliente</span><input class="meta-input" type="text" placeholder="Nome do cliente"></div>
+      <div class="meta-field"><span class="meta-label">Veículo</span><input class="meta-input" type="text" placeholder="Ex: Onix / Corolla / SUV"></div>
+      <div class="meta-field"><span class="meta-label">Placa</span><input class="meta-input" type="text" placeholder="ABC-1234"></div>
+      <div class="meta-field"><span class="meta-label">Responsável</span><input class="meta-input" type="text" placeholder="Nome do técnico"></div>
+      <div class="meta-field"><span class="meta-label">Data / Hora</span><input class="meta-input" type="text" placeholder="__/__/____"></div>
+    </div>
+
+    <main class="content">
+      <section class="tab-panel active" id="panel-essencial">
+        <div class="intro"><div class="intro-title">Lavagem Essencial</div></div>
+        <div class="stage-grid">
+          <div class="section"><div class="section-header"><div class="section-title">Exterior — Carroceria</div><div class="section-badge">Essencial</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Capô — sem sujeira visível e secagem concluída</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Teto — limpo, sem poeira ou manchas leves</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Portas dianteiras e traseiras — áreas externas limpas</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-lamas dianteiros e traseiros — sem barro aparente</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-choque dianteiro — limpo, sem resíduo de produto</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-choque traseiro — limpo, sem resíduo de produto</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Maçanetas externas — limpas e secas</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Retrovisores externos — limpos, sem manchas</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Vidros & Iluminação</div><div class="section-badge">Essencial</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-brisa — limpo e sem manchas grossas</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Vidros laterais — limpos externamente</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Vidro traseiro — limpo</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Faróis dianteiros — limpos</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Lanternas traseiras — limpas</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Rodas & Pneus</div><div class="section-badge">Essencial</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Rodas — limpeza básica concluída</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Pneus — pretinho aplicado sem excesso</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Calotas / tampas de roda (se houver) — limpas</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Interior — Habitáculo</div><div class="section-badge">Essencial</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Tapetes / carpetes — aspirados</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Painel / dashboard — limpeza leve</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Volante e câmbio — higienizados</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Vidros internos principais — limpos</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Conferência Final</div><div class="section-badge">Essencial</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Nenhum objeto pessoal do cliente foi esquecido</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Chaves entregues ao cliente</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Cliente conferiu e aprovou o serviço</span></label>
+          </div></div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="panel-detalhada">
+        <div class="intro"><div class="intro-title">Lavagem Detalhada</div><div class="intro-text">Checklist completo para quem precisa de mais acabamento, mais atenção aos cantos e mais conferência antes da entrega. Aqui entram os detalhes extras que elevam a percepção do serviço.</div></div>
+        <div class="stage-grid">
+          <div class="section"><div class="section-header"><div class="section-title">Exterior — Carroceria</div><div class="section-badge">Detalhada</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Capô — sem resíduos, polish e brilho uniformes</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Teto — limpo, sem mancha d'água ou wax acumulado</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Portas dianteiras e traseiras — painéis e molduras limpos</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-lamas dianteiros e traseiros — sem resíduo</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-choque dianteiro — limpo, sem produto acumulado</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-choque traseiro — limpo, sem produto acumulado</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Friso lateral / soleiras — limpas, protegidas</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Maçanetas externas — limpas e secas</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Retrovisores externos — limpos, sem manchas</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Tampa do porta-malas — limpa e brilhante</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Tampa da gasolina — limpa e sem resíduos ao redor</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Vidros & Iluminação</div><div class="section-badge">Detalhada</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Para-brisa — sem manchas, borracha limpa</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Vidros laterais — limpos interna e externamente</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Vidro traseiro — limpo, desembaçador visível</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Faróis dianteiros — polidos, sem embaçamento</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Lanternas traseiras — limpas, sem resíduo</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Limpadores de para-brisa — limpos, sem produto</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Rodas & Pneus</div><div class="section-badge">Detalhada</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Rodas — limpas, sem resíduo de freio ou produto</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Pneus — protegido com silicone, visual escuro e uniforme</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Caixa de roda — limpa, sem barro ou resíduo</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Calotas / tampas de roda (se houver) — limpas</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Interior — Habitáculo</div><div class="section-badge">Detalhada</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Bancos — higienizados, sem manchas, sem odor</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Tapetes / carpetes — aspirados, limpos e secos</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Painel / dashboard — limpo, protegido, sem halo branco</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Console central — limpo, sem produto em excesso</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Porta-malas — aspirado e limpo</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Painéis de porta — limpos e higienizados</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Volante e câmbio — higienizados, sem oleosidade</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Teto interno — sem manchas ou resíduo</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Cinto de segurança — limpo e recolhendo corretamente</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Ar condicionado — testado, sem odor ruim</span></label>
+          </div></div>
+          <div class="section"><div class="section-header"><div class="section-title">Conferência Final</div><div class="section-badge">Detalhada</div></div><div class="check-list">
+            <label class="check-item"><input type="checkbox"><span class="check-label">Nenhum objeto pessoal do cliente foi esquecido</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Chaves entregues ao cliente</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Foto do resultado final registrada</span></label>
+            <label class="check-item"><input type="checkbox"><span class="check-label">Cliente conferiu e aprovou o serviço</span></label>
+          </div></div>
+        </div>
+      </section>
+
+      <div class="obs-area"><div class="obs-title">Serviços adicionais / Observações do serviço</div><textarea class="obs-textarea" placeholder="Ex: cera, higienização extra, motor, remoção de manchas, observações do cliente..."></textarea></div>
+    </main>
+  </div>
+
+  <div class="finish-bar"><div class="finish-status">Cada serviço tem seu próprio checklist, com detalhes pensados para a conferência correta antes da entrega.</div><button class="btn btn-reset" id="resetBtn">Limpar marcações</button><button class="btn btn-print" onclick="window.print()">Imprimir</button></div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+    function activate(stage){tabs.forEach(t=>t.classList.toggle('active', t.dataset.stage===stage));panels.forEach(p=>p.classList.toggle('active', p.id==='panel-'+stage));}
+    tabs.forEach(t=>t.addEventListener('click',()=>activate(t.dataset.stage)));
+    document.getElementById('resetBtn').addEventListener('click',()=>{document.querySelectorAll('input[type="checkbox"]').forEach(c=>c.checked=false);document.querySelectorAll('textarea').forEach(t=>t.value='');});
+  </script>
+</body>
+</html>
